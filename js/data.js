@@ -10,10 +10,10 @@ const DATA = {
 
   resumen: {
     kpis: [
-      { label: "Hato (cabezas)", value: "38", meta: "ene-2026 · pico 54 con machos", diff: "brief: 44" },
-      { label: "Peso vivo total", value: "13,9 t", meta: "13.918 kg pesados feb-2025", diff: "brief: 16 t" },
-      { label: "Preñez", value: "~45%", meta: "9/20 vientres", diff: "brief: 94%" },
-      { label: "Ganancia diaria", value: "~0,5 kg/d", meta: "terneros 1,0–1,6 kg/d", diff: "brief: 0,90" },
+      { label: "Hato (cabezas)", value: "45", meta: "ago-2026 · 20 vacas+toro, 10 terneros, 11 levante, 4 machos", diff: "brief: 44 · ¡ya casi coincide!" },
+      { label: "Peso vivo total", value: "~15,8 t", meta: "suma últimos pesajes por lote, jul–ago 2026", diff: "brief: 16 t · ¡ya casi coincide!" },
+      { label: "Preñez (núcleo)", value: "~78%", meta: "14/18 vacas núcleo, chequeo 27-may-2026 — sube fuerte desde ~45% (feb-2025)", diff: "brief: 94%" },
+      { label: "Ganancia diaria", value: "~0,55 kg/d", meta: "terneros lactantes, may–jul 2026 (promedio 7 animales)", diff: "brief: 0,90" },
       { label: "Precio res en pie", value: "$9.750/kg", meta: "venta real jul-2025", diff: "brief: $12.000" },
       { label: "Área", value: "18,2 ha", meta: "12,7 PV + 5,6 El Recuerdo · laguna 1,8", diff: "" },
       { label: "Empleados (planilla)", value: "1", meta: "Néstor Cañas · base $2,6M/mes", diff: "brief: 3" },
@@ -21,13 +21,14 @@ const DATA = {
       { label: "Sanidad ICA", value: "Libre Bruc.+TB", meta: "certs 24BR y 24TB · renovar 2025", diff: "" },
     ],
     alertas: [
+      { nivel: "baja", titulo: "Buena noticia: el hato mejoró en 2026", texto: "El registro de campo (may–ago 2026) muestra 45 cabezas —ya casi coincide con las 44 del brief— y la preñez del núcleo subió a ~78% (14/18 vacas), muy por encima del ~45% de feb-2025. Las 4 novillas restantes (116, 120, 122, 123) se reunieron con el toro DUMAS el 10-jul-2026 para su primer servicio. Aun así falta el chequeo confirmatorio de esas novillas y un libro de movimientos formal para blindar la cifra ante due diligence.", fuente: "REGISTROS_FINCA_PALOS_VERDES_2026.xlsx" },
       { nivel: "alta", titulo: "Certificación orgánica vencida", texto: "El sello Mayacert 2023-034 (huerta) venció el 16/08/2024. Renovar para sostener 'huerta orgánica certificada'.", fuente: "SEN-COV2 CONSTRUAGRO 2023.034" },
       { nivel: "alta", titulo: "El modelo base opera en déficit", texto: "Como negocio independiente, la operación actual NO se autofinancia: ingresos ~25–50M vs costos ~90–120M/año → déficit ~50–90M. El valor hoy está en el capital natural/social/inspiración + patrimonio (tierra ~4.328M, hato ~135M), no en la utilidad. La ronda debe crear la pata financiera, no escalar un negocio rentable.", fuente: "Análisis Modelo Base 4 Retornos" },
       { nivel: "alta", titulo: "Certificaciones sanitarias por renovar", texto: "Predio libre de brucelosis (ICA 0001270553-24BR, venció 05/08/2025) y de tuberculosis (ICA 0001270553-24TB, venció 12/07/2025). Reprogramar los muestreos Servigan (~$1,9M c/u) para renovar ambas.", fuente: "Certificados ICA brucelosis/tuberculosis" },
       { nivel: "alta", titulo: "Factura de energía en mora", texto: "Factura Enel/Codensa del predio Casa Blanca Cascajal con saldo en mora (~$5,6M). Poner al día.", fuente: "202410072150" },
       { nivel: "media", titulo: "Titularidad de la tierra a aclarar", texto: "En 2017 los predios eran de Construagro LTDA; en 2025 los prediales están a nombre de terceros (M.C. Gaviria / B.T. Vargas Gil). Reconstruir la cadena de titularidad.", fuente: "Informe 2017 · prediales 2025" },
-      { nivel: "media", titulo: "Cifras del brief desalineadas con los registros", texto: "El brief publica 44 cab / 16 t / 94% / 0,90 kg/d; los registros dan 38 / 13,9 t / ~45% / ~0,5. Alinear antes de due diligence.", fuente: "reconciliacion.md" },
-      { nivel: "media", titulo: "Sin chequeo de preñez 2026", texto: "El último chequeo con conteo es de feb-2025. Programar chequeo reproductivo 2026 para sostener cualquier % actual.", fuente: "Vacas_para_Descarte" },
+      { nivel: "media", titulo: "Cifras del brief desalineadas con los registros (mejorando)", texto: "El brief publica 44 cab / 16 t / 94% / 0,90 kg/d. En ene-2026 los registros daban 38 / 13,9 t / ~45% / ~0,5 — muy lejos. Con el registro de campo a ago-2026 (45 cab / ~15,8 t / ~78%) la brecha se cerró bastante, salvo en preñez (94% vs ~78%) y ganancia diaria. Aún falta un libro de movimientos formal que concilie fecha por fecha antes de due diligence.", fuente: "reconciliacion.md · REGISTROS_FINCA_PALOS_VERDES_2026.xlsx" },
+      { nivel: "baja", titulo: "Chequeo de preñez 2026 ya se hizo — falta cerrar novillas", texto: "El chequeo reproductivo del 27-may-2026 sí tiene conteo: 14/18 vacas núcleo preñadas. Lo pendiente es el resultado de servicio de las 4 novillas de levante que se juntaron con el toro el 10-jul-2026.", fuente: "Hoja Chequeo Reproductivo" },
       { nivel: "baja", titulo: "Línea porcina sin animales", texto: "El brief incorpora cerdos en 2026, pero los censos ICA muestran 0 porcinos. Toda la economía porcina es proyección.", fuente: "Tuberculosis Palos Verdes (censo)" },
       { nivel: "media", titulo: "Predial 2026 subirá (avalúo catastral)", texto: "El IGAC (Res. 20257/2025) incrementa el avalúo catastral rural para 2026; el impuesto predial de Palos Verdes y El Recuerdo aumentará. Presupuestarlo.", fuente: "Resolución 20257 de 2025 - IGAC" },
       { nivel: "media", titulo: "Riego eléctrico caro → oportunidad solar", texto: "La bomba de riego actual (25 HP eléctrica, 18,7 kW) cuesta ~$19.679/hora a $877/kWh. Hay un estudio de bombeo solar (ene-2025) que reduciría este costo y la mora con Enel.", fuente: "Bombeo Solar Finca Palos Verdes 2025.xlsx" },
@@ -150,12 +151,12 @@ const DATA = {
 
   hato: {
     reconciliacion: [
-      { indicador: "Cabezas (fiable, reciente)", verificado: "38", brief: "44", fuente: "Inventario_Ganadero_38 (ene-2026)" },
-      { indicador: "Peso vivo total", verificado: "13.918 kg", brief: "16.000 kg", fuente: "Inventario_Ganadero_38 · O47" },
-      { indicador: "Preñez (descarte feb-2025)", verificado: "~45% (9/20)", brief: "94%", fuente: "Vacas_para_Descarte (feb-2025)" },
+      { indicador: "Cabezas (fiable, reciente)", verificado: "45 (ago-2026) · antes 38 (ene-2026)", brief: "44", fuente: "REGISTROS_FINCA_PALOS_VERDES_2026.xlsx" },
+      { indicador: "Peso vivo total", verificado: "~15,8 t (jul–ago 2026) · antes 13.918 kg", brief: "16.000 kg", fuente: "Pesajes por lote, jul–ago 2026" },
+      { indicador: "Preñez núcleo (chequeo 27-may-2026)", verificado: "~78% (14/18) · antes ~45% (feb-2025)", brief: "94%", fuente: "Hoja Chequeo Reproductivo" },
       { indicador: "Preñez al destete (reciente)", verificado: "91% (nov-2025)", brief: "94%", fuente: "Chat de manejo — seguimiento de la dueña" },
       { indicador: "Ganancia diaria (hato)", verificado: "~0,50 kg/d", brief: "0,90 kg/d", fuente: "FINCA…ENERO 28 col S" },
-      { indicador: "Ganancia diaria (terneros)", verificado: "1,0–1,6 kg/d", brief: "0,90 kg/d", fuente: "IDs 116/120/008" },
+      { indicador: "Ganancia diaria (terneros lactantes)", verificado: "~0,55 kg/d (may–jul 2026, prom. 7 animales)", brief: "0,90 kg/d", fuente: "Hoja Terneros Lactantes" },
       { indicador: "Pureza Angus", verificado: "Registro Angus & Brangus (socio 1649); en absorción a puro", brief: "Angus puro", fuente: "Pesajes y chequeos final" },
       { indicador: "Toro reproductor", verificado: "DUMAS (LEP004) · 760 kg", brief: "—", fuente: "Inventario / web finca" },
       { indicador: "Carga animal", verificado: "2,8 UGG/ha (declarada); aforo 1,45 kg/m²", brief: "2,8 UGG/ha", fuente: "Guía Aforo" },
@@ -172,6 +173,12 @@ const DATA = {
       { fecha: "24-feb-2025", total: "47", vientres: "23", toro: "1", crias: "24 crías", fuente: "LISTA…2038" },
       { fecha: "01-ene-2026", total: "38", vientres: "18", toro: "1", crias: "~19", fuente: "Inventario_38" },
       { fecha: "jun-2026 (brief)", total: "44", vientres: "—", toro: "—", crias: "—", fuente: "Brief editorial (cifra de presentación, no conciliada)" },
+      { fecha: "ago-2026 (registro de campo)", total: "45", vientres: "19 (núcleo 18 + toro cuenta aparte)", toro: "1 (DUMAS)", crias: "10 terneros lactantes + 11 levante + 4 machos enteros", fuente: "REGISTROS_FINCA_PALOS_VERDES_2026.xlsx" },
+    ],
+    chequeoReproductivo27May2026: [
+      "Núcleo de 18 vacas: 14 preñadas en distintos meses de gestación (2 a 6 meses), 1 recién parida en involución normal (#62), 1 sin confirmar (#39, solo anota 'vitaminas').",
+      "4 novillas de levante (116, 120, 122, 123) reportadas 'vacía novilla' — sin servicio confirmado a esa fecha.",
+      "10-jul-2026: las novillas de levante se reunieron con el toro DUMAS para su primer servicio — resultado pendiente de chequeo.",
     ],
   },
 

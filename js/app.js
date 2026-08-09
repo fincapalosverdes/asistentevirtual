@@ -233,6 +233,11 @@ function renderHato(container) {
   );
   container.appendChild(c2);
 
+  const c2b = el("div", "card");
+  c2b.appendChild(el("h2", null, "Chequeo reproductivo 27-may-2026 (registro de campo)"));
+  h.chequeoReproductivo27May2026.forEach((p) => c2b.appendChild(el("p", null, "• " + p)));
+  container.appendChild(c2b);
+
   const c3 = el("div", "card");
   c3.appendChild(el("h2", null, "Sanidad — estatus oficial ICA / FEDEGAN"));
   c3.appendChild(
@@ -374,6 +379,7 @@ function exportSectionExcel(key) {
     addSheet("Indicadores", ["Indicador", "Verificado", "Brief", "Fuente"], DATA.hato.reconciliacion.map((r) => [r.indicador, r.verificado, r.brief, r.fuente]));
     addSheet("Inventario", ["Fecha", "Total", "Vientres", "Toro", "Crias", "Fuente"], DATA.hato.inventarioTiempo.map((r) => [r.fecha, r.total, r.vientres, r.toro, r.crias, r.fuente]));
     addSheet("Sanidad", ["Item", "Estado", "Detalle", "Vigencia", "Fuente"], DATA.hato.sanidad.map((s) => [s.item, s.estado, s.detalle, s.vigencia, s.fuente]));
+    addSheet("Chequeo reprod. 27-may", ["Punto"], DATA.hato.chequeoReproductivo27May2026.map((p) => [p]));
   } else if (key === "diagnostico") {
     addSheet("Qué tiene", ["Activo", "Estado", "Fuente"], DATA.diagnostico.tiene.map((t) => [t.activo, t.estado, t.fuente]));
     addSheet("Financiero", ["Punto"], DATA.diagnostico.financiero.map((p) => [p]));
