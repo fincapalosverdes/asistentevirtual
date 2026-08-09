@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+<meta name="theme-color" content="#1c1b17" />
+<title>Finca Palos Verdes · Gerente de Finca</title>
+<link rel="stylesheet" href="css/style.css" />
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <nav class="sidebar">
+      <div class="brand">🌿 Palos Verdes</div>
+      <a class="nav-item" data-section="resumen">Resumen de la finca</a>
+      <a class="nav-item" data-section="brief">Brief de inversión</a>
+      <a class="nav-item" data-section="finanzas">Finanzas</a>
+      <a class="nav-item" data-section="hato">Hato y desempeño</a>
+      <a class="nav-item" data-section="diagnostico">Diagnóstico de la finca</a>
+      <a class="nav-item" data-section="certificaciones">Certificaciones y estado</a>
+      <a class="nav-item" data-section="pendientes">Documentos por solicitar</a>
+      <div class="logout">
+        <button onclick="logout()">Cerrar sesión</button>
+      </div>
+    </nav>
+    <main class="main" id="main"></main>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    requireLogin();
+    initApp();
+  </script>
+</body>
+</html>
