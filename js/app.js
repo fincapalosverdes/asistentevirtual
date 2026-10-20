@@ -8,6 +8,7 @@ const SECTION_TITLES = {
   diagnostico: ["Diagnóstico de la finca", "Qué tiene la finca, cómo ha sido su desempeño y qué información debe completarse para due diligence."],
   certificaciones: ["Certificaciones y estado", "Certificación orgánica, sanidad, método agroecológico, gremio y estado corporativo — con vigencias y fuentes."],
   pendientes: ["Documentos por solicitar", "Lo que falta para sostener el brief en una due diligence. Empezar por la prioridad alta."],
+  asistente: ["Asistente", "Chat con IA sobre la información del panel — responde con datos verificados de la finca."],
 };
 
 function el(tag, cls, html) {
@@ -47,6 +48,8 @@ function renderHeader(container, key) {
   header.appendChild(el("h1", null, title));
   header.appendChild(el("p", null, sub));
   container.appendChild(header);
+
+  if (key === "asistente") return;
 
   const toolbar = el("div", "toolbar no-print");
   const pdfBtn = el("button", "btn ghost", "⬇ Descargar PDF");
@@ -234,9 +237,20 @@ function renderHato(container) {
   container.appendChild(c2);
 
   const c2b = el("div", "card");
-  c2b.appendChild(el("h2", null, "Chequeo reproductivo 27-may-2026 (registro de campo)"));
-  h.chequeoReproductivo27May2026.forEach((p) => c2b.appendChild(el("p", null, "• " + p)));
+  c2b.appendChild(el("h2", null, "Chequeo reproductivo y nacimientos 2026 (registro de campo)"));
+  h.chequeoReproductivo.forEach((p) => c2b.appendChild(el("p", null, "• " + p)));
   container.appendChild(c2b);
+
+  const c2c = el("div", "card");
+  c2c.appendChild(el("h2", null, "Lote de venta 2026 (Excel de registros)"));
+  c2c.appendChild(el("p", null, h.loteVenta.resumen));
+  c2c.appendChild(tableFromRows(["Placa", "Peso (kg)", "Estado reproductivo / nota"], h.loteVenta.animales));
+  container.appendChild(c2c);
+
+  const c2d = el("div", "card");
+  c2d.appendChild(el("h2", null, "Pasturas y aforos"));
+  h.pasturas.forEach((p) => c2d.appendChild(el("p", null, "• " + p)));
+  container.appendChild(c2d);
 
   const c3 = el("div", "card");
   c3.appendChild(el("h2", null, "Sanidad — estatus oficial ICA / FEDEGAN"));
@@ -321,6 +335,76 @@ function renderPendientes(container) {
   container.appendChild(c2);
 }
 
+// ---------- ASISTENTE ----------
+function renderAsistente(container) {
+  const card = el("div", "card");
+  card.appendChild(el("h2", null, "Pregúntale al asistente sobre la finca"));
+  card.appendChild(el("p", null, "Responde con la información verificada del panel: hato, finanzas, certificaciones, brief de inversión y más."));
+
+  const chatBox = el("div");
+  chatBox.style.cssText = "display:flex;flex-direction:column;gap:10px;max-height:420px;overflow-y:auto;margin:16px 0;padding:4px;";
+  chatBox.id = "chatBox";
+  card.appendChild(chatBox);
+
+  const form = el("form");
+  form.style.cssText = "display:flex;gap:8px;";
+  const input = el("input");
+  input.type = "text";
+  input.placeholder = "Ej: ¿Cuántas vacas están preñadas ahora?";
+  input.style.cssText = "flex:1;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:0.9rem;";
+  input.id = "chatInput";
+  const sendBtn = el("button", "btn", "Enviar");
+  sendBtn.type = "submit";
+  form.appendChild(input);
+  form.appendChild(sendBtn);
+  card.appendChild(form);
+
+  container.appendChild(card);
+
+  const history = [];
+
+  function addBubble(role, text) {
+    const bubble = el("div");
+    const isUser = role === "user";
+    bubble.style.cssText = `align-self:${isUser ? "flex-end" : "flex-start"};max-width:80%;padding:10px 14px;border-radius:12px;font-size:0.88rem;line-height:1.5;background:${isUser ? "var(--brown-2)" : "var(--bg-panel-2)"};color:${isUser ? "#fff" : "var(--text)"};white-space:pre-wrap;`;
+    bubble.textContent = text;
+    chatBox.appendChild(bubble);
+    chatBox.scrollTop = chatBox.scrollHeight;
+    return bubble;
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = "";
+    sendBtn.disabled = true;
+    addBubble("user", text);
+    history.push({ role: "user", content: text });
+    const loadingBubble = addBubble("assistant", "Pensando…");
+
+    try {
+      const resp = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: history }),
+      });
+      const data = await resp.json();
+      if (!resp.ok) {
+        loadingBubble.textContent = "Error: " + (data.error || "no se pudo responder.");
+      } else {
+        loadingBubble.textContent = data.reply;
+        history.push({ role: "assistant", content: data.reply });
+      }
+    } catch (err) {
+      loadingBubble.textContent = "Error de conexión con el asistente.";
+    } finally {
+      sendBtn.disabled = false;
+      input.focus();
+    }
+  });
+}
+
 const RENDERERS = {
   resumen: renderResumen,
   brief: renderBrief,
@@ -329,6 +413,7 @@ const RENDERERS = {
   diagnostico: renderDiagnostico,
   certificaciones: renderCertificaciones,
   pendientes: renderPendientes,
+  asistente: renderAsistente,
 };
 
 function showSection(key) {
@@ -379,7 +464,8 @@ function exportSectionExcel(key) {
     addSheet("Indicadores", ["Indicador", "Verificado", "Brief", "Fuente"], DATA.hato.reconciliacion.map((r) => [r.indicador, r.verificado, r.brief, r.fuente]));
     addSheet("Inventario", ["Fecha", "Total", "Vientres", "Toro", "Crias", "Fuente"], DATA.hato.inventarioTiempo.map((r) => [r.fecha, r.total, r.vientres, r.toro, r.crias, r.fuente]));
     addSheet("Sanidad", ["Item", "Estado", "Detalle", "Vigencia", "Fuente"], DATA.hato.sanidad.map((s) => [s.item, s.estado, s.detalle, s.vigencia, s.fuente]));
-    addSheet("Chequeo reprod. 27-may", ["Punto"], DATA.hato.chequeoReproductivo27May2026.map((p) => [p]));
+    addSheet("Chequeo reprod. 2026", ["Punto"], DATA.hato.chequeoReproductivo.map((p) => [p]));
+    addSheet("Lote de venta", ["Placa", "Peso kg", "Nota"], DATA.hato.loteVenta.animales);
   } else if (key === "diagnostico") {
     addSheet("Qué tiene", ["Activo", "Estado", "Fuente"], DATA.diagnostico.tiene.map((t) => [t.activo, t.estado, t.fuente]));
     addSheet("Financiero", ["Punto"], DATA.diagnostico.financiero.map((p) => [p]));
