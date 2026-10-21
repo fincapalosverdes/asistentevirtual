@@ -7,6 +7,7 @@ const SECTION_TITLES = {
   hato: ["Hato y desempeño", "Inventario, pesos, ganancia diaria, preñez y sanidad — según los registros de la finca. Donde el brief difiere, se muestra la cifra verificada."],
   diagnostico: ["Diagnóstico de la finca", "Qué tiene la finca, cómo ha sido su desempeño y qué información debe completarse para due diligence."],
   certificaciones: ["Certificaciones y estado", "Certificación orgánica, sanidad, método agroecológico, gremio y estado corporativo — con vigencias y fuentes."],
+  instrucciones: ["Instrucciones al administrador", "Registro de las instrucciones que Olga Elizabeth da al administrador de la finca, con fecha, responsable y estado."],
   pendientes: ["Documentos por solicitar", "Lo que falta para sostener el brief en una due diligence. Empezar por la prioridad alta."],
   asistente: ["Asistente", "Chat con IA sobre la información del panel — responde con datos verificados de la finca."],
 };
@@ -38,8 +39,8 @@ function tableFromRows(headers, rows) {
 }
 
 function tagSpan(tag) {
-  const map = { verificado: "Verificado", modelado: "Modelado", pendiente: "Pendiente" };
-  return `<span class="tag ${tag}">${map[tag] || tag}</span>`;
+  const map = { verificado: "Verificado", modelado: "Modelado", pendiente: "Pendiente", "en curso": "En curso", programado: "Programado", hecho: "Hecho" };
+  return `<span class="tag ${String(tag).replace(" ", "-")}">${map[tag] || tag}</span>`;
 }
 
 function renderHeader(container, key) {
@@ -241,12 +242,6 @@ function renderHato(container) {
   h.chequeoReproductivo.forEach((p) => c2b.appendChild(el("p", null, "• " + p)));
   container.appendChild(c2b);
 
-  const c2c = el("div", "card");
-  c2c.appendChild(el("h2", null, "Lote de venta 2026 (Excel de registros)"));
-  c2c.appendChild(el("p", null, h.loteVenta.resumen));
-  c2c.appendChild(tableFromRows(["Placa", "Peso (kg)", "Estado reproductivo / nota"], h.loteVenta.animales));
-  container.appendChild(c2c);
-
   const c2d = el("div", "card");
   c2d.appendChild(el("h2", null, "Pasturas y aforos"));
   h.pasturas.forEach((p) => c2d.appendChild(el("p", null, "• " + p)));
@@ -335,6 +330,21 @@ function renderPendientes(container) {
   container.appendChild(c2);
 }
 
+// ---------- INSTRUCCIONES ----------
+function renderInstrucciones(container) {
+  const rows = DATA.instrucciones;
+  const abiertas = rows.filter((r) => r.estado !== "hecho").length;
+  const c = el("div", "card");
+  c.appendChild(el("h2", null, `Registro de instrucciones (${rows.length} · ${abiertas} abiertas)`));
+  c.appendChild(
+    tableFromRows(
+      ["#", "Fecha", "Tema", "Instrucción", "Responsable", "Estado", "Seguimiento"],
+      rows.map((r) => [String(r.n), r.fecha, r.tema, r.instruccion, r.responsable, tagSpan(r.estado), r.seguimiento || "—"])
+    )
+  );
+  container.appendChild(c);
+}
+
 // ---------- ASISTENTE ----------
 function renderAsistente(container) {
   const card = el("div", "card");
@@ -413,6 +423,7 @@ const RENDERERS = {
   diagnostico: renderDiagnostico,
   certificaciones: renderCertificaciones,
   pendientes: renderPendientes,
+  instrucciones: renderInstrucciones,
   asistente: renderAsistente,
 };
 
@@ -465,13 +476,14 @@ function exportSectionExcel(key) {
     addSheet("Inventario", ["Fecha", "Total", "Vientres", "Toro", "Crias", "Fuente"], DATA.hato.inventarioTiempo.map((r) => [r.fecha, r.total, r.vientres, r.toro, r.crias, r.fuente]));
     addSheet("Sanidad", ["Item", "Estado", "Detalle", "Vigencia", "Fuente"], DATA.hato.sanidad.map((s) => [s.item, s.estado, s.detalle, s.vigencia, s.fuente]));
     addSheet("Chequeo reprod. 2026", ["Punto"], DATA.hato.chequeoReproductivo.map((p) => [p]));
-    addSheet("Lote de venta", ["Placa", "Peso kg", "Nota"], DATA.hato.loteVenta.animales);
   } else if (key === "diagnostico") {
     addSheet("Qué tiene", ["Activo", "Estado", "Fuente"], DATA.diagnostico.tiene.map((t) => [t.activo, t.estado, t.fuente]));
     addSheet("Financiero", ["Punto"], DATA.diagnostico.financiero.map((p) => [p]));
     addSheet("Oportunidades", ["Oportunidad"], DATA.diagnostico.oportunidades.map((p) => [p]));
   } else if (key === "certificaciones") {
     addSheet("Certificaciones", ["Tema", "Estado", "Detalle", "Vigencia", "Fuente"], DATA.certificaciones.map((c) => [c.tema, c.estado, c.detalle, c.vigencia, c.fuente]));
+  } else if (key === "instrucciones") {
+    addSheet("Instrucciones", ["#", "Fecha", "Tema", "Instrucción", "Responsable", "Estado", "Seguimiento"], DATA.instrucciones.map((r) => [r.n, r.fecha, r.tema, r.instruccion, r.responsable, r.estado, r.seguimiento]));
   } else if (key === "pendientes") {
     addSheet("Prioridad alta", ["Documento", "Motivo"], DATA.pendientes.alta.map((d) => [d.doc, d.motivo]));
     addSheet("Prioridad media", ["Documento", "Motivo"], DATA.pendientes.media.map((d) => [d.doc, d.motivo]));
