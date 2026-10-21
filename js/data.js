@@ -11,30 +11,29 @@ const DATA = {
   resumen: {
     kpis: [
       { label: "Hato (cabezas)", value: "44", meta: "último registro (oct-2026): 1 toro, 18 vacas, 10 novillas, 12 terneros, 3 machos · +2 machos (125, 130) por confirmar", diff: "brief: 44 ✓ coincide" },
-      { label: "Peso vivo total", value: "~17 t", meta: "suma de últimos pesajes ago–oct 2026, antes del lote de venta", diff: "brief: 16 t" },
+      { label: "Peso vivo total", value: "~17 t", meta: "suma de últimos pesajes ago–oct 2026 · ~$166M a $9.750/kg [estimado]", diff: "brief: 16 t" },
       { label: "Preñez (núcleo)", value: "11 de 18", meta: "preñadas confirmadas 18-ago-2026 · 1 vacía (#37) · 6 paridas recientes por confirmar servicio. El 27-may eran 16 de 18", diff: "brief: 94%" },
       { label: "Ganancia diaria", value: "~0,82 kg/d", meta: "terneros lactantes jul–ago 2026 (9 animales) · machos pre-destete 1,0–1,33 kg/d", diff: "brief: 0,90" },
-      { label: "Precio res en pie", value: "$10.500/kg", meta: "listado de venta 2026 (20 animales) · machos enteros a $13.000/kg · última venta confirmada jul-2025: $9.750", diff: "brief: $12.000" },
+      { label: "Precio res en pie", value: "$9.750/kg", meta: "venta real jul-2025 (última venta documentada)", diff: "brief: $12.000" },
       { label: "Área", value: "18,2 ha", meta: "12,7 PV + 5,6 El Recuerdo · laguna 1,8", diff: "" },
       { label: "Empleados (planilla)", value: "1", meta: "Néstor Cañas · base $2,6M/mes", diff: "brief: 3" },
-      { label: "Cert. orgánica", value: "Huerta", meta: "Mayacert 2023-034 · venció ago-2024", diff: "" },
-      { label: "Sanidad ICA", value: "Libre Bruc.+TB", meta: "certs 24BR y 24TB · renovar 2025", diff: "" },
+      { label: "Cert. orgánica", value: "No renovada", meta: "decisión de la familia · la huerta produce para autoconsumo", diff: "" },
+      { label: "Sanidad ICA", value: "Renueva en nov-2026", meta: "visita de vacunación · certs 24BR y 24TB", diff: "" },
     ],
     alertas: [
-      { nivel: "alta", titulo: "Lote de venta de 20 animales: confirmar si ya se ejecutó", texto: "El Excel de registros trae un listado de 20 hembras (8.275 kg) con 'TOTAL VENTA' de $86.887.500 a $10.500/kg. Incluye 8 animales que aparecen preñadas (#116, 122, 123, 63, 72, 44, 71, 40), a #43 con cría al pie y a #143, que figura como hembra aquí y como macho en la hoja de terneros. Si se vende, el hato baja de 44 a ~24 cabezas y a 12 vacas núcleo — lejos de las ~40 vientres que plantea la línea 1 del modelo de inversión. Aparte, tres machos (#135, 137, 139; 837 kg) están valorados a $13.000/kg = ~$10,9M.", fuente: "REGISTROS_FINCA_PALOS_VERDES_2026.xlsx · Hoja4, Machos enteros" },
       { nivel: "baja", titulo: "El hato se recuperó y se está reponiendo", texto: "Entre ene-2026 y oct-2026 nacieron 11 terneros (#142 a #152). El chequeo del 27-may-2026 dio 16 de 18 vacas núcleo preñadas, y el del 18-ago-2026 muestra 11 preñadas confirmadas, 1 vacía (#37) y 6 vacas recién paridas pendientes de nuevo servicio. Las pasturas también mejoraron: aforo promedio de 4,4 kg/m² en 2026 contra 3,6 en 2025 (meta: 6). Sigue faltando un libro de movimientos formal para blindar las cifras ante due diligence.", fuente: "REGISTROS_FINCA_PALOS_VERDES_2026.xlsx" },
-      { nivel: "alta", titulo: "Certificación orgánica vencida", texto: "El sello Mayacert 2023-034 (huerta) venció el 16/08/2024. Renovar para sostener 'huerta orgánica certificada'.", fuente: "SEN-COV2 CONSTRUAGRO 2023.034" },
-      { nivel: "alta", titulo: "El modelo base opera en déficit", texto: "Como negocio independiente, la operación actual NO se autofinancia: ingresos ~25–50M vs costos ~90–120M/año → déficit ~50–90M. El valor hoy está en el capital natural/social/inspiración + patrimonio (tierra ~4.328M, hato ~135M), no en la utilidad. La ronda debe crear la pata financiera, no escalar un negocio rentable.", fuente: "Análisis Modelo Base 4 Retornos" },
-      { nivel: "alta", titulo: "Certificaciones sanitarias por renovar", texto: "Predio libre de brucelosis (ICA 0001270553-24BR, venció 05/08/2025) y de tuberculosis (ICA 0001270553-24TB, venció 12/07/2025). Reprogramar los muestreos Servigan (~$1,9M c/u) para renovar ambas.", fuente: "Certificados ICA brucelosis/tuberculosis" },
-      { nivel: "alta", titulo: "Factura de energía en mora", texto: "Factura Enel/Codensa del predio Casa Blanca Cascajal con saldo en mora (~$5,6M). Poner al día.", fuente: "202410072150" },
-      { nivel: "media", titulo: "Titularidad de la tierra a aclarar", texto: "En 2017 los predios eran de Construagro LTDA; en 2025 los prediales están a nombre de terceros (M.C. Gaviria / B.T. Vargas Gil). Reconstruir la cadena de titularidad.", fuente: "Informe 2017 · prediales 2025" },
-      { nivel: "media", titulo: "Cifras del brief vs. registros (mucho más cerca)", texto: "El brief publica 44 cab / 16 t / 94% / 0,90 kg/d. Los registros de oct-2026 dan 44 cab / ~17 t / 11 de 18 preñadas confirmadas (16 de 18 en mayo) / ~0,82 kg/d en terneros lactantes. Cabezas, peso y ganancia ya coinciden; el 94% de preñez no tiene un cálculo único trazable. El precio real de venta ($10.500/kg en el listado) sigue por debajo de los $12.000 del brief.", fuente: "reconciliacion.md · REGISTROS_FINCA_PALOS_VERDES_2026.xlsx" },
-      { nivel: "media", titulo: "Chequeo de preñez: falta confirmar las paridas y las novillas", texto: "Del chequeo del 18-ago-2026 quedan pendientes: 6 vacas recién paridas (#38, 39, 41, 43, 59, 62) sin confirmación de nuevo servicio, 4 novillas en rechequeo (#122, 126, 127, 128) y 6 vacías (#37, 120, 131, 132, 133 y 134).", fuente: "Hoja Chequeo Reproductivo" },
+      { nivel: "baja", titulo: "Certificación orgánica: no se renovó, por decisión", texto: "La certificación Mayacert 2023-034 (huerta, lograda en 2023) no se renovó porque vender no cubre el esfuerzo de las más de 300 acciones que exige. Hoy la huerta produce para el consumo de quienes viven en la finca y para darles calidad de vida en la alimentación. El manejo sigue sin químicos desde 2017. Por eso no debe presentarse como 'huerta orgánica certificada'.", fuente: "Indicado por la familia (Olga Elizabeth), oct-2026 · SEN-COV2 CONSTRUAGRO 2023.034" },
+      { nivel: "media", titulo: "Modelo base: la riqueza crece en activos; la caja aún no cubre los costos", texto: "El patrimonio de la finca crece cada día: el hato pasó de 13,9 t (ene-2026) a ~17 t de peso vivo y nacieron 11 terneros en 2026; el suelo se restaura, el ganado toma agua limpia y las praderas son cada vez más variadas (aforo promedio 4,4 kg/m² en 2026 vs 3,6 en 2025). A precio de venta real ($9.750/kg) el hato vale ~$166M, frente a ~$135M en enero [estimado]. Ese valor está en animales vivos, no en ventas: los ingresos de caja (~25–50M/año) siguen por debajo de los costos (~90–120M/año), y la ronda busca convertir este crecimiento en caja. Patrimonio adicional: tierra ~4.328M.", fuente: "Análisis Modelo Base 4 Retornos · registros 2026" },
+      { nivel: "media", titulo: "Certificaciones sanitarias: se renuevan en la visita de noviembre", texto: "En noviembre de 2026 llega la visita de vacunación y en ella se renuevan las certificaciones sanitarias: predio libre de brucelosis (ICA 0001270553-24BR, venció 05/08/2025) y de tuberculosis (ICA 0001270553-24TB, venció 12/07/2025). Hasta entonces figuran vencidas.", fuente: "Indicado por la familia, oct-2026 · Certificados ICA brucelosis/tuberculosis" },
+      { nivel: "media", titulo: "Factura de energía en disputa con Enel (en manos de abogados)", texto: "La factura de Enel/Codensa del predio Casa Blanca Cascajal (~$5,6M) está en seguimiento con los abogados. En octubre de 2026 se envió una carta a Enel porque no reconocieron los pagos hechos en los primeros 4 meses de 2024: los dejaron acumulando sin descontar lo pagado. Falta adjuntar la carta y los comprobantes de pago.", fuente: "Indicado por la familia, oct-2026 · 202410072150" },
+      { nivel: "media", titulo: "Titularidad de la tierra: verificar con los registros", texto: "La familia indica que ambas fincas están a nombre de Construagro S.A.S., pero los prediales 2025 cargados aquí aún muestran a M.C. Gaviria. Acción: pedir en Hacienda el registro/historial de cada finca (los últimos recibos de pago deben mostrar el titular) y los certificados de tradición y libertad. Si no aparece a nombre de Construagro, revisar la negociación de 2023 con Rubén y su hija.", fuente: "Indicado por la familia, oct-2026 · prediales 2025" },
+      { nivel: "media", titulo: "Cifras del brief vs. registros (mucho más cerca)", texto: "El brief publica 44 cab / 16 t / 94% / 0,90 kg/d. Los registros de oct-2026 dan 44 cab / ~17 t / 11 de 18 preñadas confirmadas (16 de 18 en mayo) / ~0,82 kg/d en terneros lactantes. Cabezas, peso y ganancia ya coinciden; el 94% de preñez no tiene un cálculo único trazable. El único precio real de venta documentado ($9.750/kg, jul-2025) sigue por debajo de los $12.000 del brief.", fuente: "reconciliacion.md · REGISTROS_FINCA_PALOS_VERDES_2026.xlsx" },
+      { nivel: "media", titulo: "Verificar servicio y preñez tras el chequeo de agosto", texto: "Pendiente confirmar: (1) si las 6 vacas recién paridas (#38, 39, 41, 43, 59, 62) ya tienen nuevo servicio; (2) el resultado del rechequeo de las 4 novillas (#122, 126, 127, 128); y (3) si las 6 vacías (#37, 120, 131, 132, 133 y 134) ya quedaron preñadas.", fuente: "Hoja Chequeo Reproductivo · indicado por la familia, oct-2026" },
       { nivel: "baja", titulo: "Línea porcina sin animales", texto: "El brief incorpora cerdos en 2026, pero los censos ICA muestran 0 porcinos. Toda la economía porcina es proyección.", fuente: "Tuberculosis Palos Verdes (censo)" },
-      { nivel: "media", titulo: "Predial 2026 subirá (avalúo catastral)", texto: "El IGAC (Res. 20257/2025) incrementa el avalúo catastral rural para 2026; el impuesto predial de Palos Verdes y El Recuerdo aumentará. Presupuestarlo.", fuente: "Resolución 20257 de 2025 - IGAC" },
-      { nivel: "media", titulo: "Riego eléctrico caro → oportunidad solar", texto: "La bomba de riego actual (25 HP eléctrica, 18,7 kW) cuesta ~$19.679/hora a $877/kWh. Hay un estudio de bombeo solar (ene-2025) que reduciría este costo y la mora con Enel.", fuente: "Bombeo Solar Finca Palos Verdes 2025.xlsx" },
+      { nivel: "media", titulo: "Predial: valor pagado y descuento por suelo regenerado", texto: "Recordar el valor pagado del predial y el descuento por suelo regenerado (la familia cree que fue de cerca del 50%; por confirmar en los recibos). Además, el IGAC (Res. 20257/2025) sube el avalúo catastral rural para 2026, así que conviene presupuestar el predial de Palos Verdes y El Recuerdo.", fuente: "Indicado por la familia, oct-2026 · Resolución 20257 de 2025 - IGAC" },
+      { nivel: "media", titulo: "Modelo solar: papeles enviados, la empresa ayuda a resolver", texto: "La bomba de riego actual (25 HP eléctrica, 18,7 kW) cuesta ~$19.679/hora a $877/kWh. Hay un estudio de bombeo solar (ene-2025) que reduciría ese costo. Según la familia, el 20-oct-2026 se enviaron los papeles y la empresa quedó de ayudar a resolverlo rápido.", fuente: "Bombeo Solar Finca Palos Verdes 2025.xlsx · indicado por la familia, oct-2026" },
       { nivel: "media", titulo: "Inversión right-sized: US$286k, no US$1M", texto: "El modelo costeado (cotizaciones reales) dimensiona la ronda en US$285.899 (~29% del brief), por fases. Break-even operativo Año 2, caja Año 3, EBITDA de crucero ~250M (20%). La Fase 2 (venue, 53% del ingreso) depende del uso de suelo POT — plan B sin venue = US$190k.", fuente: "Modelo de inversión costeado · Parte 2" },
-      { nivel: "baja", titulo: "Oportunidad: créditos de carbono", texto: "En los archivos hay material del proyecto de ganadería regenerativa Carbono Local+ (Verra ID 3927, VCS+CCB, VM0042). Potencial 5ª línea de ingreso. Acción: confirmar si Palos Verdes está vinculada formalmente y bajo qué términos.", fuente: "Roll-up Carbono Local+ NP 2023" },
+      { nivel: "baja", titulo: "Oportunidad: créditos de carbono (hablar con Acoganar)", texto: "Hay material del proyecto de ganadería regenerativa Carbono Local+ (Verra ID 3927, VCS+CCB, VM0042). Potencial 5ª línea de ingreso. Próximo paso: conversarlo con Acoganar y confirmar si Palos Verdes está vinculada y bajo qué términos.", fuente: "Roll-up Carbono Local+ NP 2023 · indicado por la familia, oct-2026" },
     ],
   },
 
@@ -45,7 +44,7 @@ const DATA = {
       { nombre: "🌱 Natural", estado: "Alto", detalle: "MO 15,4%, 2,8 UGG/ha sin químicos (triple del promedio nacional), libre de brucelosis y TB, PUEAA + concesión de agua (Exp. CAR 97237)." },
       { nombre: "👥 Social", estado: "Medio", detalle: "Empleo + jornales + 10 jóvenes formados (RENASER) + red ACOGANAR." },
       { nombre: "✨ Inspiración", estado: "Alto", detalle: "Método replicable, libro en preparación, 38 años de la fundación familiar." },
-      { nombre: "💰 Financiero", estado: "En déficit hoy", detalle: "Lo que esta inversión construye." },
+      { nombre: "💰 Financiero", estado: "Patrimonio creciendo; caja en construcción", detalle: "El hato, el suelo, el agua y las praderas crecen cada año; esta inversión construye la pata de caja." },
     ],
     modeloHolistico: {
       resumen: "Inversión núcleo recomendada: ~US$218.000 (~COP 899 M) — ~22% del US$1M del planteamiento original. Break-even operativo Año 2; EBITDA acumulado positivo Año 2–3; EBITDA de crucero ~195 M/año (margen ~24%).",
@@ -80,7 +79,7 @@ const DATA = {
       { dato: "Precio de venta de res", valor: "9.750 COP/kg en pie (real, jul-2025)", fuente: "250704 Compra de Ganado" },
       { dato: "Agua", valor: "Concesión Río Subachoque 1,09 L/s + PUEAA (Construagro)", fuente: "Exp. CAR 97237" },
     ],
-    cierre: "~US$218k (núcleo), por fases, para construir la pata financiera sobre tres retornos ya probados. El hotel y el bombeo solar quedan como decisiones separadas. El resultado: de activo regenerativo en déficit a un agronegocio diversificado con EBITDA de crucero ~195 M (24%) y equilibrio operativo en el Año 2-3.",
+    cierre: "~US$218k (núcleo), por fases, para construir la pata financiera sobre tres retornos ya probados. El hotel y el bombeo solar quedan como decisiones separadas. El resultado: de un activo regenerativo en crecimiento a un agronegocio diversificado con EBITDA de crucero ~195 M (24%) y equilibrio operativo en el Año 2-3.",
   },
 
   finanzas: {
@@ -100,8 +99,6 @@ const DATA = {
     ],
     ventas: [
       { fecha: "04/07/2025", linea: "Res (en pie)", detalle: "6 terneros Angus (106,111,115,118,119,121)", precio: "$9.750/kg", total: "peso × 9.750", comprador: "P. Wilkie / R. Pombo", fuente: "250704 Compra de Ganado" },
-      { fecha: "2026 (por confirmar si se ejecutó)", linea: "Res (en pie) — lote de 20 hembras", detalle: "116, 120, 122, 123, 126, 127, 128, 131, 132, 133, 134, 143, 138, 136, 63, 71, 72, 43, 40, 44 · 8.275 kg", precio: "$10.500/kg", total: "$86.887.500", comprador: "—", fuente: "Excel registros 2026 · Hoja4" },
-      { fecha: "2026 (por confirmar)", linea: "Res (en pie) — machos enteros", detalle: "135, 137, 139 · 837 kg (283 / 270 / 284)", precio: "$13.000/kg", total: "~$10,9M", comprador: "—", fuente: "Excel registros 2026 · Machos enteros" },
       { fecha: "2026", linea: "Res (en pie) — terneros marcados VENDIDO", detalle: "#142 (macho) y #145 (hembra); sin peso ni valor en el registro", precio: "—", total: "—", comprador: "—", fuente: "Excel registros 2026 · Terneros lactantes" },
       { fecha: "Año 2022", linea: "Huerta", detalle: "Facturación total (37 facturas)", precio: "~$49.000/factura", total: "$1.815.391", comprador: "Varios", fuente: "Facturas huerta" },
       { fecha: "—", linea: "Cerdo", detalle: "Sin ventas registradas", precio: "—", total: "$0", comprador: "—", fuente: "Censo ICA" },
@@ -122,7 +119,7 @@ const DATA = {
       { categoria: "Riego (cotización)", detalle: "Tubería/aspersores", valor: "$801.800", periodo: "sep-2024", tipo: "Cotización" },
       { categoria: "Ambiental", detalle: "Tasa de seguimiento CAR", valor: "$159.205", periodo: "2024", tipo: "Factura" },
       { categoria: "Sanidad", detalle: "Pruebas brucelosis+TB (Servigan, 2×/año)", valor: "$1.910.000", periodo: "ene-2024", tipo: "Factura/Cotización" },
-      { categoria: "Servicios", detalle: "Energía Enel (en mora)", valor: "$5.624.300", periodo: "sep-2024", tipo: "Factura" },
+      { categoria: "Servicios", detalle: "Energía Enel (en disputa; con abogados)", valor: "$5.624.300", periodo: "sep-2024", tipo: "Factura" },
       { categoria: "Admin (ledger)", detalle: "Gastos admin/tributarios 2025", valor: "~$46.800.000", periodo: "2025", tipo: "Ledger" },
       { categoria: "Admin (ledger)", detalle: "Gastos admin/tributarios 2024", valor: "~$50.500.000", periodo: "2024", tipo: "Ledger" },
       { categoria: "Vehículo", detalle: "Mantenimiento Nissan Frontier (RAN039)", valor: "$4.168.000", periodo: "ago-2025", tipo: "Cotización" },
@@ -167,8 +164,8 @@ const DATA = {
       { indicador: "Carga animal / aforo", verificado: "2,8 UGG/ha (declarada); aforo promedio 4,4 kg/m² en 2026 vs 3,6 en 2025 (meta 6)", brief: "2,8 UGG/ha", fuente: "Cuadro de aforos 2025–2026" },
     ],
     sanidad: [
-      { item: "Brucelosis", estado: "Confirmado", detalle: "Cert. 0001270553-24BR. Único reactor (animal #44) confirmado NEGATIVO por fluorescencia polarizada (reporte ICA 220-2024)", vigencia: "21/08/2024 → 05/08/2025 (renovar)", fuente: "Certificado predio libre brucelosis; 220-2024" },
-      { item: "Tuberculosis", estado: "Confirmado", detalle: "Certificación ICA N° 0001270553-24TB (Servigan Sabana); 54 Angus negativos", vigencia: "07/08/2024 → 12/07/2025 (renovar)", fuente: "Certificado predio libre tuberculosis" },
+      { item: "Brucelosis", estado: "Confirmado", detalle: "Cert. 0001270553-24BR. Único reactor (animal #44) confirmado NEGATIVO por fluorescencia polarizada (reporte ICA 220-2024)", vigencia: "21/08/2024 → 05/08/2025 (se renueva en la visita de nov-2026)", fuente: "Certificado predio libre brucelosis; 220-2024" },
+      { item: "Tuberculosis", estado: "Confirmado", detalle: "Certificación ICA N° 0001270553-24TB (Servigan Sabana); 54 Angus negativos", vigencia: "07/08/2024 → 12/07/2025 (se renueva en la visita de nov-2026)", fuente: "Certificado predio libre tuberculosis" },
       { item: "Vacunación", estado: "Confirmado", detalle: "Aftosa 38 dosis + brucelosis (ciclo 2026)", vigencia: "04/06/2026", fuente: "PVPP-9582684 FEDEGAN/ICA" },
     ],
     inventarioTiempo: [
@@ -188,16 +185,6 @@ const DATA = {
       "18-ago-2026, novillas: #116 y #123 preñadas de 2 meses, #122 preñada en rechequeo; #120, 131, 132, 133 y 134 vacías; #126, 127 y 128 en rechequeo.",
       "Nacimientos 2026: 11 terneros (#142 a #152). Los últimos: #150 (14-sep), #151 (29-sep, madre 71) y #152 (5-oct, madre 26).",
     ],
-    loteVenta: {
-      resumen: "20 hembras · 8.275 kg · $10.500/kg · TOTAL VENTA $86.887.500. Por confirmar si ya se ejecutó o es un listado propuesto.",
-      animales: [
-        ["116", "488", "Preñada 2 meses (novilla)"], ["120", "323", "Vacía"], ["122", "431", "Preñada, en rechequeo"], ["123", "449", "Preñada 2 meses"],
-        ["126", "368", "En rechequeo"], ["127", "363", "En rechequeo"], ["128", "300", "En rechequeo"], ["131", "361", "Vacía"],
-        ["132", "377", "Vacía"], ["133", "284", "Vacía"], ["134", "309", "Vacía (ternera lactante en otra hoja)"], ["143", "213", "Figura como hembra aquí y como macho en Terneros lactantes"],
-        ["138", "284", "Ternera lactante"], ["136", "308", "Ternera lactante"], ["63", "596", "Vaca preñada 5 meses"], ["71", "633", "Vaca próxima a parir (parió #151 el 29-sep)"],
-        ["72", "608", "Vaca preñada 5 meses"], ["43", "450", "Vaca con cría al pie (#147)"], ["40", "591", "Vaca preñada 5-6 meses"], ["44", "539", "Vaca preñada 4-5 meses"],
-      ],
-    },
     pasturas: [
       "Aforo promedio por lote: 3,6 kg/m² en 2025 (26 mediciones) y 4,4 kg/m² en 2026 (30 mediciones). Meta: 6 kg/m².",
       "Descanso promedio de los lotes en 2026: ~106 días (3 a 4 meses).",
@@ -209,18 +196,18 @@ const DATA = {
 
   diagnostico: {
     tiene: [
-      { activo: "Hato", estado: "44 cabezas (último registro, oct-2026): 1 toro Angus puro registrado (DUMAS/LEP004, 783 kg), 18 vacas núcleo, 10 novillas, 12 terneros lactantes y 3 machos enteros · ~17 t de peso vivo (antes de un lote de venta de 20 hembras por confirmar)", fuente: "REGISTROS_FINCA_PALOS_VERDES_2026.xlsx" },
+      { activo: "Hato", estado: "44 cabezas (último registro, oct-2026): 1 toro Angus puro registrado (DUMAS/LEP004, 783 kg), 18 vacas núcleo, 10 novillas, 12 terneros lactantes y 3 machos enteros · ~17 t de peso vivo", fuente: "REGISTROS_FINCA_PALOS_VERDES_2026.xlsx" },
       { activo: "Tierra", estado: "21,4 ha (Palos Verdes 16 ha + El Recuerdo 5,4 ha); avalúo catastral conjunto $4.328 M", fuente: "Impuesto Palos Verdes, Predial El Recuerdo" },
       { activo: "Genética", estado: "Angus comercial en absorción a puro; un reproductor puro registrado; trazabilidad individual", fuente: "Listas y registros" },
-      { activo: "Certificaciones", estado: "Orgánica (huerta) · Libre de TB · Libre de brucelosis (venció ago-2025 → renovar) · Vacunación aftosa al día (jun-2026) · Proyecto de carbono (Carbono Local+/Verra)", fuente: "Certificados ICA, cert. orgánica" },
+      { activo: "Certificaciones", estado: "Huerta sin certificación orgánica (no renovada por decisión de la familia) · Libre de TB y brucelosis (certificados se renuevan en la visita de nov-2026) · Vacunación aftosa al día (jun-2026) · Proyecto de carbono (Carbono Local+/Verra)", fuente: "Certificados ICA, cert. orgánica" },
       { activo: "Agua", estado: "Concesión del río Subachoque + contador + PUEAA (CAR) — de las pocas fincas que cumple todos los requisitos", fuente: "PUEAA, RT_FACTURAS (CAR)" },
       { activo: "Equipo", estado: "1 empleado formal (Néstor Cañas, técnico orgánico)", fuente: "Nómina, planilla" },
     ],
     financiero: [
       "Ingresos reales mínimos e intermitentes: huerta $1,8 M en 2022 (único año documentado) y 1 venta de ganado (jul-2025, sin peso ni total documentado). El negocio no se autofinancia con ventas.",
       "Costos dominados por estructura corporativa: el ledger de Construagro mueve ~45–55 M/año, mayormente overhead del holding, no costo directo de finca.",
-      "Costo directo de finca (estimado) ~$60–80 M/año: nómina ~40 M, forraje ~5–15 M, prediales ~9,4 M, energía con mora acumulada ~$13 M, sanidad/riego/jornales puntuales.",
-      "Resultado: déficit operativo estructural (estimado) ≈ −$50 a −75 M/año, financiado por la familia/Construagro. El valor está en el activo (tierra ~$4.328 M + hato Angus ~13,9 t), no en el flujo.",
+      "Costo directo de finca (estimado) ~$60–80 M/año: nómina ~40 M, forraje ~5–15 M, prediales ~9,4 M, energía en disputa con Enel ~$13 M, sanidad/riego/jornales puntuales.",
+      "Resultado de caja (estimado): el flujo operativo ≈ −$50 a −75 M/año lo financia la familia/Construagro, mientras el patrimonio crece: tierra ~$4.328 M y hato Angus ~17 t (~$166 M a $9.750/kg, frente a ~$135 M en enero).",
     ],
     infoFaltante: {
       p1: [
@@ -230,12 +217,12 @@ const DATA = {
       ],
       p2: [
         "Facturación de la huerta 2023–2025 (solo existe 2022).",
-        "Consolidar pasivos y deuda (mora energía ~$13 M, proveedores, impuestos vehiculares ~$10,8 M).",
-        "Aclarar la titularidad de la tierra — los prediales figuran a nombre de terceros (Gaviria; Vargas Gil).",
+        "Consolidar pasivos y deuda (disputa con Enel ~$13 M, proveedores, impuestos vehiculares ~$10,8 M).",
+        "Verificar la titularidad: pedir en Hacienda el registro de cada finca y los últimos recibos de pago, más los certificados de tradición (según la familia ya están a nombre de Construagro S.A.S.; los prediales 2025 aún muestran a Gaviria; revisar la negociación de 2023 con Rubén y su hija).",
       ],
       p3: [
         "Reconstruir el libro de movimientos del hato (altas y bajas) que concilie el inventario (54→47→38).",
-        "Cerrar el caso del positivo de brucelosis (#44) con segregación, retesteo o descarte documentado; renovar certificación.",
+        "Cerrar el caso del positivo de brucelosis (#44) con segregación, retesteo o descarte documentado; la certificación se renueva en la visita de nov-2026.",
         "Corregir el cálculo de preñez e IEP (hoja de reproducción con fórmulas erróneas).",
       ],
     },
@@ -251,7 +238,7 @@ const DATA = {
   },
 
   certificaciones: [
-    { tema: "Orgánico (huerta)", estado: "Real", detalle: "Mayacert 2023-034 · ~70 cultivos hortícolas. NO certifica la carne.", vigencia: "16/08/2023 → venció 16/08/2024", fuente: "SEN-COV2" },
+    { tema: "Orgánico (huerta)", estado: "No renovada (decisión)", detalle: "Mayacert 2023-034 · ~70 cultivos hortícolas. NO certificaba la carne. No se renovó: vender no cubre el esfuerzo de las +300 acciones que exige; hoy la huerta es para el consumo de quienes viven en la finca.", vigencia: "16/08/2023 → 16/08/2024", fuente: "SEN-COV2 · indicado por la familia" },
     { tema: "Libre de brucelosis", estado: "Confirmado", detalle: "ICA 0001270553-24BR", vigencia: "→ 05/08/2025", fuente: "Certificado predio libre brucelosis" },
     { tema: "Libre de tuberculosis", estado: "Confirmado", detalle: "Certificación ICA de predio libre de TB N° 0001270553-24TB (54 Angus negativos)", vigencia: "07/08/2024 → 12/07/2025", fuente: "Certificado predio libre tuberculosis" },
     { tema: "Sin químicos desde 2017", estado: "Respaldado", detalle: "Estudio agroecológico jul-2017 (Ing. Guido Carrillo) + insumos solo ecológicos (FUNDASES 2021)", vigencia: "2017 →", fuente: "Informe Palos Verdes Julio 2017" },
@@ -261,7 +248,17 @@ const DATA = {
     { tema: "Construagro S.A.S.", estado: "Vigente", detalle: "NIT 860.520.662-7 · desde 1984 · gerente Olga E. Grijalba", vigencia: "—", fuente: "CCB / RUT" },
     { tema: "Mejora genética (plan)", estado: "Propuesta", detalle: "BIOTEGAN S.A.S.: producción de embriones in vitro (FIV) y transferencia para acelerar pureza/genética Angus", vigencia: "oct-2025", fuente: "Propuesta de trabajo por preñez" },
     { tema: "Plan de agua (PUEAA)", estado: "Vigente", detalle: "Plan de Uso Eficiente y Ahorro de Agua + estudio de bombeo solar para riego", vigencia: "2025", fuente: "Informe Final PUEAA 2025" },
-    { tema: "Proyecto de carbono", estado: "Oportunidad", detalle: "Carbono Local+ (Verra ID 3927, VCS+CCB, VM0042) — potencial 5ª línea de ingreso. Confirmar vinculación formal del predio.", vigencia: "2023", fuente: "Roll-up Carbono Local+ NP 2023" },
+    { tema: "Proyecto de carbono", estado: "Oportunidad", detalle: "Carbono Local+ (Verra ID 3927, VCS+CCB, VM0042) — potencial 5ª línea de ingreso. Próximo paso: hablarlo con Acoganar y confirmar la vinculación formal del predio.", vigencia: "2023", fuente: "Roll-up Carbono Local+ NP 2023" },
+  ],
+
+  instrucciones: [
+    { n: 1, fecha: "20-oct-2026", tema: "Titularidad de la tierra", instruccion: "Ir a Hacienda y pedir los registros de cada finca. Los últimos recibos de pago deben mostrar el titular. Si no aparece a nombre de Construagro S.A.S., revisar lo que se llevó con Rubén y su hija en 2023.", responsable: "Administrador", estado: "pendiente", seguimiento: "" },
+    { n: 2, fecha: "20-oct-2026", tema: "Reproducción del hato", instruccion: "Verificar si las 6 vacas recién paridas (#38, 39, 41, 43, 59, 62) tienen nuevo servicio; el rechequeo de las 4 novillas (#122, 126, 127, 128); y si las 6 vacías (#37, 120, 131, 132, 133, 134) ya quedaron preñadas.", responsable: "Administrador", estado: "pendiente", seguimiento: "" },
+    { n: 3, fecha: "20-oct-2026", tema: "Predial", instruccion: "Recordar el valor pagado y el descuento por suelo regenerado (se cree que cerca del 50%; confirmar en los recibos).", responsable: "Administrador", estado: "pendiente", seguimiento: "" },
+    { n: 4, fecha: "20-oct-2026", tema: "Modelo solar", instruccion: "Papeles enviados el 20-oct; la empresa quedó de ayudar a resolverlo rápido. Hacer seguimiento a su respuesta.", responsable: "Olga Elizabeth", estado: "en curso", seguimiento: "Papeles enviados 20-oct-2026" },
+    { n: 5, fecha: "20-oct-2026", tema: "Créditos de carbono", instruccion: "Hablar la oportunidad con Acoganar.", responsable: "Olga Elizabeth", estado: "pendiente", seguimiento: "" },
+    { n: 6, fecha: "19-oct-2026", tema: "Factura de energía Enel", instruccion: "Seguimiento con los abogados a la carta enviada a Enel por los pagos de ene–abr 2024 no reconocidos. Anexar la carta y los comprobantes de pago.", responsable: "Abogados", estado: "en curso", seguimiento: "Carta enviada a Enel" },
+    { n: 7, fecha: "oct-2026", tema: "Visita de vacunación (nov-2026)", instruccion: "En la visita de noviembre se vacuna y se renuevan las certificaciones sanitarias (brucelosis y tuberculosis).", responsable: "Por definir", estado: "programado", seguimiento: "Noviembre 2026" },
   ],
 
   pendientes: {
@@ -269,12 +266,13 @@ const DATA = {
       { doc: "Libro de movimientos del hato (altas y bajas)", motivo: "Conciliar el conteo: cada animal con fecha de entrada y salida. Es el documento que falta para explicar 44 vs 38." },
       { doc: "Guías de movilización ICA (SINIGAN) + bonos de venta", motivo: "Probar cada salida del hato. Solo existe la guía de jul-2025 (6 terneros)." },
       { doc: "Inventario oficial fechado y firmado, con desglose por clase", motivo: "Fijar LA cifra de referencia del brief a una fecha de corte." },
-      { doc: "Renovación cert. orgánica Mayacert (post ago-2024)", motivo: "Sostener 'huerta orgánica certificada' en 2026." },
-      { doc: "Renovación brucelosis (vence 05/08/2025)", motivo: "Mantener estatus sanitario." },
+      { doc: "Renovación certificaciones sanitarias (brucelosis y tuberculosis)", motivo: "Programada en la visita de vacunación de noviembre de 2026." },
       { doc: "Cotizaciones reales de capex (cuarto frío, furgón, venue, huerta)", motivo: "Respaldar el uso de US$1,0M." },
       { doc: "Registro sanitario / INVIMA del desposte", motivo: "Vender carne despostada legalmente." },
+      { doc: "Carta a Enel (oct-2026) y comprobantes de pago ene–abr 2024", motivo: "Soportar la disputa por pagos no reconocidos; el caso está con los abogados." },
       { doc: "Extracto bancario operativo de la finca", motivo: "Reconstruir ingresos/costos directos." },
-      { doc: "Títulos de propiedad de la tierra + cadena histórica", motivo: "Definir qué entra a la operación." },
+      { doc: "Registros de Hacienda y certificados de tradición de cada finca", motivo: "Confirmar que Palos Verdes y El Recuerdo están a nombre de Construagro S.A.S.; los últimos recibos de pago deben mostrar el titular. Si no, revisar lo acordado en 2023 con Rubén y su hija." },
+      { doc: "Recibos de predial: valor pagado y descuento por suelo regenerado", motivo: "Confirmar el valor pagado y el descuento (la familia cree ~50%)." },
       { doc: "Licencias de uso del suelo / POT para eventos", motivo: "Línea de eventos (53% del ingreso Año 5)." },
     ],
     media: [
