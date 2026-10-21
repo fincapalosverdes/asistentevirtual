@@ -468,3 +468,5 @@ footer.foot {
   body { background: #fff; color: #111; }
   .kpi-card, .card, .alert, table { border-color: #ccc !important; }
 }
+.tag.en-curso, .tag.programado { background: rgba(217,164,65,0.18); color: var(--amber); }
+.tag.hecho { background: rgba(111,154,90,0.18); color: var(--green); }
